@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Identification{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <p class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+    {% endif %}
+
+    {{ form(form, {'attr': {'action': path('app_login') }} ) }}
+{% endblock %}
