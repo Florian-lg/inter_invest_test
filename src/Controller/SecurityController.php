@@ -29,4 +29,10 @@ class SecurityController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/logout', name: 'app_logout', methods: ['GET'])]
+    public function logoutAction(): Response
+    {
+        return $this->redirectToRoute('home');
+    }
 }
