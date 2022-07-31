@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Liste des entreprises{% endblock %}
+
+{% block body %}
+    {% for company in companies %}
+        <a href="{{ url('company_show', {'company': company.id }) }}">{{ company.name }}</a>
+    {% endfor %}
+{% endblock %}

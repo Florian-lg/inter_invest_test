@@ -6,10 +6,42 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import * as tempusDominus from "@eonasdan/tempus-dominus";
+import {DateTimeFormatOptions} from "@eonasdan/tempus-dominus";
 
 const $ = require('jquery');
 require('bootstrap');
+
+const picker = new tempusDominus.TempusDominus(document.getElementById('inlinePicker'), {
+    display: {
+        inline: true
+    }
+});
+
+
+
+$(".day").on("click", function () {
+    const viewDate = picker.viewDate;
+
+    let date = {
+        'year': viewDate.getFullYear(),
+        'month': (viewDate.getMonth() + 1) < 10 ? `0${(viewDate.getMonth() + 1)}` : (viewDate.getMonth() + 1),
+        'day': viewDate.getDate() < 10 ? `0${viewDate.getDate()}` : viewDate.getDate(),
+        'hours': viewDate.getHours() < 10 ? `0${viewDate.getHours()}` : viewDate.getHours(),
+        'minutes': viewDate.getMinutes() < 10 ? `0${viewDate.getMinutes()}` : viewDate.getMinutes(),
+        'seconds': viewDate.getSeconds() < 10 ? `0${viewDate.getSeconds()}` : viewDate.getSeconds()
+    };
+
+    console.log(viewDate.getDate())
+
+    var url = window.location.href;
+
+    url += `?date=${date.year}-${date.month}-${date.day}-${date.hours}-${date.minutes}-${date.seconds}`;
+
+    window.location.href = url;
+})
+

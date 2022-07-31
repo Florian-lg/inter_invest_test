@@ -6,6 +6,7 @@ use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
@@ -75,12 +76,14 @@ class Company
         return $this;
     }
 
+    //Virtual properties
+
     /**
      * @return string|null
      */
     public function getName(): ?string
     {
-        return $this->companyArchives->count() > 0 ? $this->companyArchives->last()->getName() : null;
+        return $this->companyArchives->last()->getName();
     }
 
     public function setName(?string $name): self
@@ -95,7 +98,7 @@ class Company
      */
     public function getSiren(): ?string
     {
-        return $this->companyArchives->count() > 0 ? $this->companyArchives->last()->getSiren() : null;
+        return $this->companyArchives->last()->getSiren();
     }
 
     public function setSiren(?string $siren): self
@@ -110,7 +113,7 @@ class Company
      */
     public function getRegistrationCity(): ?string
     {
-        return $this->companyArchives->count() > 0 ? $this->companyArchives->last()->getRegistrationCity() : null;
+        return $this->companyArchives->last()->getRegistrationCity();
     }
 
     public function setRegistrationCity(?string $registrationCity): self
@@ -125,7 +128,7 @@ class Company
      */
     public function getRegistrationDate(): ?\DateTimeInterface
     {
-        return $this->companyArchives->count() > 0 ? $this->companyArchives->last()->getRegistrationDate() : null;
+        return $this->companyArchives->last()->getRegistrationDate();
     }
 
     public function setRegistrationDate(?\DateTimeInterface $registrationDate): self
@@ -135,17 +138,29 @@ class Company
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getLegalStatus(): ?string
+    public function getLegalStatus(): ?LegalStatus
     {
-        return $this->companyArchives->count() > 0 ? $this->companyArchives->last()->getLegalStatus() : null;
+        return $this->companyArchives->last()->getLegalStatus();
     }
 
-    public function setLegalStatus(?string $legalStatus): self
+    public function setLegalStatus(?LegalStatus $legalStatus): self
     {
         $this->companyArchives->last()->setLegalStatus($legalStatus);
+
+        return $this;
+    }
+
+    public function getSites(): ArrayCollection|PersistentCollection
+    {
+        return $this->companyArchives->last()->getSites();
+    }
+
+    public function setSites($sites): self
+    {
+        /** @var Site $site */
+        foreach ($sites as $site) {
+            $this->companyArchives->last()->addSite($site);
+        }
 
         return $this;
     }

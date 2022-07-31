@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} {{ company.name }}{% endblock %}
+
+{% block body %}
+    <section class="heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{ company.name }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="content-block" id="main-content">
+                        <div class="content-block-header">
+                            <div class="selected-date">
+                                {{ company.createdAt|date('d/m/Y') }}
+                            </div>
+                        </div>
+                        <div class="separator-container">
+                            <div class="separator"></div>
+                        </div>
+                        <div class="content-block-main">
+                            <div class="mb-4" id="general-information">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2>Informations générales</h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <span class="info" id="legal-status">{{ company.name }}</span>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <span class="info" id="legal-status">{{ company.legalStatus }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <span class="info" id="registration-city">{{ company.registrationCity }}</span>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <span class="info" id="registration-date">{{ company.registrationDate|date('d/m/Y') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sites">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2>Siège social</h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sitesModal">
+                                            Voir les différents sites
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="content-block" id="date">
+                        <div class='log-event' id='inlinePicker'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="sitesModal" tabindex="-1" aria-labelledby="sitesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sitesModalLabel">Sites de l'entreprise</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion" id="accordionSites">
+                        {% for site in company.sites %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading-{{ loop.index0 }}">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ loop.index0 }}" aria-expanded="true" aria-controls="collapse-{{ loop.index0 }}">
+                                    {{ site.name }}
+                                </button>
+                            </h2>
+                            <div id="collapse-{{ loop.index0 }}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionSites">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            {{ site.city }}
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            {{ site.zipcode }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            {{ site.address }}
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            {{ site.country }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ include('partials/toast.html.twig') }}
+{% endblock %}

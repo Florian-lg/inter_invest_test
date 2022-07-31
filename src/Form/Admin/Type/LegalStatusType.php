@@ -15,6 +15,9 @@ class LegalStatusType extends AbstractType
         $resolver->setDefaults([
             'class' => LegalStatus::class,
             'choice_label' => 'name',
+            'choice_value' => function (?LegalStatus $entity) {
+                return $entity ? $entity->getId() : '';
+            },
             'label' => 'Statut juridique',
         ]);
     }

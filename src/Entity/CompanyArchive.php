@@ -39,7 +39,7 @@ class CompanyArchive
     #[ORM\JoinColumn(nullable: true)]
     private ?LegalStatus $legalStatus = null;
 
-    #[ORM\OneToMany(mappedBy: 'companyArchive', targetEntity: Site::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'companyArchive', targetEntity: Site::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $sites;
 
     public function __construct()
@@ -133,6 +133,13 @@ class CompanyArchive
     public function getSites(): Collection
     {
         return $this->sites;
+    }
+
+    public function setSites($sites): self
+    {
+        $this->sites = $sites;
+
+        return $this;
     }
 
     public function addSite(Site $site): self

@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@import "@eonasdan/tempus-dominus/dist/css/tempus-dominus.css";
+@import "config/variables";
+@import "~bootstrap";
+@import "partials/navbar";
+@import "components/datepicker";
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: $white;
+
+    .heading {
+        background: #111540;
+        background: linear-gradient(90deg,#111540,#272e80);
+        color: $white;
+        padding: 6rem 0 10rem 0;
+
+        h1 {
+            font-weight: 700;
+        }
+    }
+
+    .content {
+        position: relative;
+        margin-top: -130px;
+
+        .content-block {
+            border-radius: 25px;
+            background: $white;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
+            &#main-content {
+                min-height: 600px;
+            }
+
+            &#date {
+                padding: 20px;
+            }
+
+            .content-block-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                padding-right: 35px;
+                padding-top: 40px;
+
+                .selected-date {
+                    height: 50px;
+                    display: inline-flex;
+                    align-items: center;
+                    padding-left: 50px;
+                    padding-right: 25px;
+                    border-radius: 0 8px 8px 0;
+                    color: #fff;
+                    font-size: 18px;
+                    font-weight: 700;
+                    letter-spacing: -.5px;
+                    background: #ed6c7e;
+                }
+            }
+
+            .separator-container {
+                margin-top: 40px;
+                margin-bottom: 40px;
+                padding: 0 50px;
+
+                .separator {
+                    height: 1px;
+                    background: #d8e3f2;
+                }
+            }
+
+            .content-block-main {
+                padding: 0 50px 25px;
+
+                h2 {
+                    position: relative;
+                    color: #272e80;
+                    font-size: 24px;
+                    margin-bottom: 40px;
+                    width: fit-content;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        height: 3px;
+                        background-color: $blue;
+                        left: 0;
+                        right: 0;
+                        bottom: -5px;
+                    }
+                }
+
+                .info {
+                    display: block;
+                    font-size: 21px;
+
+                    &:before {
+                        content: "";
+                        color: #ed631e;
+                        font-weight: 900;
+                    }
+
+                    &#company-name {
+                        &:before {
+                            content: "\f1ad"
+                        }
+                    }
+
+                    &#legal-status {
+                        &:before {
+                            content: "\f24e";
+                        }
+                    }
+
+                    &#registration-city {
+                        &:before {
+                            content: "\e4d2";
+                        }
+                    }
+
+                    &#registration-date {
+                        &:before {
+                            content: "\f274";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

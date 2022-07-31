@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Company;
 use App\Entity\CompanyArchive;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -39,28 +40,37 @@ class CompanyArchiveRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return CompanyArchive[] Returns an array of CompanyArchive objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findLastFilled(Company $company)
+    {
+        return $this
+            ->createQueryBuilder('ca')
+            ->andWhere('ca.company = :company')
+            ->andWhere('ca.name IS NOT NULL')
+            ->andWhere('ca.siren IS NOT NULL')
+            ->andWhere('ca.registrationCity IS NOT NULL')
+            ->andWhere('ca.registrationDate IS NOT NULL')
+            ->setParameter('company', $company)
+            ->orderBy('ca.id', 'DESC')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
+        ;
+    }
 
-//    public function findOneBySomeField($value): ?CompanyArchive
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findByCompanyAndDate(Company $company, string $date)
+    {
+        return $this
+            ->createQueryBuilder('ca')
+            ->andWhere('ca.company = :company')
+            ->andWhere('ca.createdAt <= :date')
+            ->setParameters([
+                'company' => $company,
+                'date' => $date
+            ])
+            ->setMaxResults(1)
+            ->orderBy('ca.createdAt', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

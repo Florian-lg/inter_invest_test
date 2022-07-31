@@ -1,0 +1,13 @@
+#inlinePicker {
+  .tempus-dominus-widget {
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+
+    .day {
+      &.active {
+        background-color: $blue;
+      }
+    }
+  }
+}

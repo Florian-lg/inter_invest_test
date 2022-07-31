@@ -9,10 +9,19 @@
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <script
+                    defer
+                    src="https://use.fontawesome.com/releases/v6.1.2/js/all.js"
+                    integrity="sha384-11X1bEJVFeFtn94r1jlvSC7tlJkV2VJctorjswdLzqOJ6ZvYBSZQkaQVXG0R4Flt"
+                    crossorigin="anonymous"
+            ></script>
         {% endblock %}
     </head>
     <body>
-        <div class="container">
+        <header>
+            {{ include('partials/navbar.html.twig') }}
+        </header>
+        <div id="content" role="main">
             {% block body %}{% endblock %}
         </div>
     </body>
