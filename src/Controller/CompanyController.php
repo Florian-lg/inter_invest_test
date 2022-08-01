@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Entity\CompanyArchive;
+use App\Form\Type\SearchCompanyType;
 use App\Repository\CompanyArchiveRepository;
 use App\Repository\CompanyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,10 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompanyController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function indexAction(CompanyRepository $companyRepository): Response
+    public function indexAction(CompanyRepository $companyRepository, Request $request): Response
     {
+        $form = $this->createForm(SearchCompanyType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+        }
+
         return $this->render('company/index.html.twig', [
-            'companies' => $companyRepository->findAll()
+            'companies' => $companyRepository->findAll(),
+            'form' => $form->createView()
         ]);
     }
 

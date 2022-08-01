@@ -32,6 +32,9 @@ class Site
     #[ORM\Column(length: 255)]
     private ?string $country = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isHeadOffice = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Site
     public function setCountry(string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function isHeadOffice(): ?bool
+    {
+        return $this->isHeadOffice;
+    }
+
+    public function setIsHeadOffice(?bool $isHeadOffice): self
+    {
+        $this->isHeadOffice = $isHeadOffice;
 
         return $this;
     }

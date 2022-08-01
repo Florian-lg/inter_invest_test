@@ -1,74 +1,112 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 @import "@eonasdan/tempus-dominus/dist/css/tempus-dominus.css";
+
 @import "config/variables";
+
 @import "~bootstrap";
+
 @import "partials/navbar";
+@import "partials/spacer";
+
 @import "components/datepicker";
 
 body {
     font-family: 'Roboto', sans-serif;
     background: $white;
 
+    section {
+        .separator-container {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            padding: 0 50px;
+
+            .separator {
+                height: 1px;
+                background: #d8e3f2;
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding-right: 35px;
+            padding-top: 40px;
+
+            .selected-date {
+                height: 50px;
+                display: inline-flex;
+                align-items: center;
+                padding-left: 50px;
+                padding-right: 25px;
+                border-radius: 0 8px 8px 0;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 700;
+                letter-spacing: -.5px;
+                background: #ed6c7e;
+            }
+        }
+    }
+
     .heading {
         background: #111540;
         background: linear-gradient(90deg,#111540,#272e80);
         color: $white;
-        padding: 6rem 0 10rem 0;
+        padding: 6rem 0 5rem 0;
+
+        #back-to-list {
+            font-size: 18px;
+            text-decoration: none;
+            color: $white;
+        }
 
         h1 {
             font-weight: 700;
+            margin-top: 20px;
         }
     }
 
     .content {
+        .content-with-bg {
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            background: $white;
+        }
+
         position: relative;
-        margin-top: -130px;
+        margin-top: -40px;
 
         .content-block {
             border-radius: 25px;
             background: $white;
             box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 
-            &#main-content {
-                min-height: 600px;
-            }
-
             &#date {
                 padding: 20px;
             }
 
-            .content-block-header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                padding-right: 35px;
-                padding-top: 40px;
+            form[name="search_company"] {
+                input[type="text"] {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
 
-                .selected-date {
-                    height: 50px;
-                    display: inline-flex;
-                    align-items: center;
-                    padding-left: 50px;
-                    padding-right: 25px;
-                    border-radius: 0 8px 8px 0;
-                    color: #fff;
-                    font-size: 18px;
-                    font-weight: 700;
-                    letter-spacing: -.5px;
-                    background: #ed6c7e;
+                    &:focus {
+                        box-shadow: none;
+                    }
                 }
-            }
 
-            .separator-container {
-                margin-top: 40px;
-                margin-bottom: 40px;
-                padding: 0 50px;
+                button {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                    background-color: $orange;
+                    border-color: $orange;
 
-                .separator {
-                    height: 1px;
-                    background: #d8e3f2;
+                    &:focus {
+                        box-shadow: none;
+                    }
                 }
             }
 
@@ -96,8 +134,15 @@ body {
                 .info {
                     display: block;
                     font-size: 21px;
+                    margin-bottom: 0.5rem;
 
-                    &:before {
+                    svg {
+                        color: $orange;
+                        width: 35px;
+                        margin-right: 10px;
+                    }
+
+                    /*&:before {
                         content: "";
                         color: #ed631e;
                         font-weight: 900;
@@ -126,8 +171,48 @@ body {
                             content: "\f274";
                         }
                     }
+
+                    &#head-office-name {
+                        &:before {
+                            content: "\f1ad"
+                        }
+                    }
+
+                    &#head-office-name {
+                        &:before {
+                            content: "\e4d2"
+                        }
+                    }
+
+                    &#head-office-zipcode {
+                        &:before {
+                            content: "\f276"
+                        }
+                    }
+
+                    &#head-office-address {
+                        &:before {
+                            content: "\e4d2"
+                        }
+                    }
+
+                    &#head-office-country {
+                        &:before {
+                            content: "\f0ac"
+                        }
+                    } */
                 }
             }
+        }
+    }
+
+    .list {
+        .company {
+            display: block;
+            padding: 15px;
+            border-radius: 25px;
+            box-shadow: 1px 5px 8px rgb(212, 212, 212, 0.5);
+            text-decoration: none;
         }
     }
 }

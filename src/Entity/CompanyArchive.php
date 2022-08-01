@@ -164,6 +164,17 @@ class CompanyArchive
         return $this;
     }
 
+    public function getHeadOffice(): ?Site
+    {
+        foreach ($this->getSites() as $site) {
+            if ($site->isHeadOffice()) {
+                return $site;
+            }
+        }
+
+        return null;
+    }
+
     public function __toString(): string
     {
         return $this->name ?? '';

@@ -61,6 +61,7 @@ class CompanyManager
                 ->setZipcode($previousSite->getZipcode())
                 ->setAddress($previousSite->getAddress())
                 ->setCountry($previousSite->getCountry())
+                ->setIsHeadOffice($previousSite->isHeadOffice())
             ;
 
             $sites[] = $site;

@@ -11,7 +11,6 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import * as tempusDominus from "@eonasdan/tempus-dominus";
-import {DateTimeFormatOptions} from "@eonasdan/tempus-dominus";
 
 const $ = require('jquery');
 require('bootstrap');
@@ -36,9 +35,13 @@ $(".day").on("click", function () {
         'seconds': viewDate.getSeconds() < 10 ? `0${viewDate.getSeconds()}` : viewDate.getSeconds()
     };
 
-    console.log(viewDate.getDate())
-
     var url = window.location.href;
+    const paramsIndex = url.indexOf("?date");
+    console.log(paramsIndex)
+
+    if (paramsIndex > -1) {
+        url = url.slice(0, paramsIndex);
+    }
 
     url += `?date=${date.year}-${date.month}-${date.day}-${date.hours}-${date.minutes}-${date.seconds}`;
 

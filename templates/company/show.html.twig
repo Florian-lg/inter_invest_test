@@ -3,21 +3,13 @@
 {% block title %}{{ parent() }} {{ company.name }}{% endblock %}
 
 {% block body %}
-    <section class="heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>{{ company.name }}</h1>
-                </div>
-            </div>
-        </div>
-    </section>
+    {% include 'sections/heading.html.twig' with {'title': company.name, 'backLink': url('company_index') } %}
     <section class="content">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-8">
                     <div class="content-block" id="main-content">
-                        <div class="content-block-header">
+                        <div class="section-header">
                             <div class="selected-date">
                                 {{ company.createdAt|date('d/m/Y') }}
                             </div>
@@ -34,33 +26,54 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
-                                        <span class="info" id="legal-status">{{ company.name }}</span>
+                                        <span class="info"><i class="fa-solid fa-id-card"></i> {{ company.name }}</span>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <span class="info" id="legal-status">{{ company.legalStatus }}</span>
+                                        <span class="info"><i class="fa-solid fa-scale-balanced"></i> {{ company.legalStatus }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
-                                        <span class="info" id="registration-city">{{ company.registrationCity }}</span>
+                                        <span class="info"><i class="fa-solid fa-building-circle-check"></i> {{ company.registrationCity }}</span>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <span class="info" id="registration-date">{{ company.registrationDate|date('d/m/Y') }}</span>
+                                        <span class="info"><i class="fa-solid fa-calendar-check"></i> {{ company.registrationDate|date('d/m/Y') }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div id="sites">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <h2>Siège social</h2>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sitesModal">
-                                            Voir les différents sites
-                                        </button>
-                                    </div>
+                                    {% if company.headOffice is not null %}
+                                        <div class="col-12">
+                                            <h2>Siège social</h2>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <span class="info"><i class="fa-solid fa-building-circle-check"></i> {{ company.headOffice.name }}</span>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <span class="info"><i class="fa-solid fa-city"></i> {{ company.headOffice.city }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <span class="info"><i class="fa-solid fa-location-dot"></i> {{ company.headOffice.zipcode }}</span>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <span class="info"><i class="fa-solid fa-map-location"></i> {{ company.headOffice.address }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <span class="info"><i class="fa-solid fa-globe"></i> {{ company.headOffice.country }}</span>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sitesModal">
+                                                    Voir tous les sites
+                                                </button>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

@@ -68,7 +68,7 @@ class CompanyArchiveRepository extends ServiceEntityRepository
                 'date' => $date
             ])
             ->setMaxResults(1)
-            ->orderBy('ca.createdAt', 'ASC')
+            ->orderBy('ca.createdAt', 'DESC')
             ->getQuery()
             ->getOneOrNullResult()
         ;

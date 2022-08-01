@@ -1,0 +1,16 @@
+<section class="heading">
+    <div class="container">
+        {% if backLink is defined %}
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{ backLink }}" id="back-to-list"><i class="fa-solid fa-arrow-left"></i> Retour à la liste</a>
+                </div>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ title ?? '' }}</h1>
+            </div>
+        </div>
+    </div>
+</section>

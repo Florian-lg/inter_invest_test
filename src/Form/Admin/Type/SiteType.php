@@ -4,6 +4,7 @@ namespace App\Form\Admin\Type;
 
 use App\Entity\Site;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,6 +15,10 @@ class SiteType extends AbstractType
     {
 
         $builder
+            ->add('isHeadOffice', CheckboxType::class, [
+                'label' => 'Siège social',
+                'required' => false
+            ])
             ->add('name', TextType::class, [
                 'label' => 'Nom du site',
                 'required' => true,

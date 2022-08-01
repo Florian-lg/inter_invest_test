@@ -1,5 +1,60 @@
 nav {
   &.navbar {
+    padding: 0;
 
+    @media (max-width: 992px) {
+      padding: 5px;
+    }
+
+    .navbar-toggler {
+      background-color: $orange;
+
+      svg {
+        color: $white;
+      }
+    }
+
+    .nav-link {
+      font-size: 21px;
+      color: $blue;
+      position: relative;
+      transition: all, 0.25s;
+
+      &:after {
+        content: "";
+        position: absolute;
+        height: 3px;
+        width: 50%;
+        right: 20px;
+        bottom: 0;
+        background-color: transparent;
+        transition: all, 0.25s;
+      }
+
+      &:before {
+        content: "";
+        position: absolute;
+        height: 3px;
+        width: 50%;
+        left: 20px;
+        bottom: 0;
+        background-color: transparent;
+        transition: all, 0.25s;
+      }
+
+      &:hover {
+        color: $orange;
+
+        &:after {
+          background-color: $orange;
+          right: 0;
+        }
+
+        &:before {
+          background-color: $orange;
+          left: 0;
+        }
+      }
+    }
   }
 }
