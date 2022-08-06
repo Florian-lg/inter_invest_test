@@ -1,5 +1,57 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Inter invest test{% endblock %}
+
 {% block body %}
-    Home
+    {% include 'sections/heading.html.twig' with {'title': 'Inter invest test'} %}
+
+    <section class="content mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content-block p-4 search-company" id="main-content">
+                        <h2>Rechercher une entreprise</h2>
+                        {{ form_start(searchCompanyForm) }}
+                        <div class="d-flex">
+                            {{ form_widget(searchCompanyForm.companyName) }}
+                            {{ form_widget(searchCompanyForm.submit) }}
+                        </div>
+                        {{ form_end(searchCompanyForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="list">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Les dernières entreprises</h2>
+                </div>
+            </div>
+            <div class="row">
+                {% for company in lastCreatedCompanies %}
+                    <div class="col-12 col-lg-4 col-md-6 mb-4">
+                        {% include 'partials/company.html.twig' with {'company': company} %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="list bg-light-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Les dernières modifications d'entreprise</h2>
+                </div>
+            </div>
+            <div class="row">
+                {% for company in lastUpdatedCompanies %}
+                    <div class="col-12 col-lg-4 col-md-6 mb-4">
+                        {% include 'partials/company.html.twig' with {'company': company} %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

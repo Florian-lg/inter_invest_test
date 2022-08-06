@@ -9,13 +9,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="content-block p-4" id="main-content">
-                        {{ form_start(form) }}
+                    <div class="content-block p-4 search-company" id="main-content">
+                        {{ form_start(searchCompanyForm) }}
                             <div class="d-flex">
-                                {{ form_widget(form.companyName) }}
-                                {{ form_widget(form.submit) }}
+                                {{ form_widget(searchCompanyForm.companyName) }}
+                                {{ form_widget(searchCompanyForm.submit) }}
                             </div>
-                        {{ form_end(form) }}
+                        {{ form_end(searchCompanyForm) }}
                     </div>
                 </div>
             </div>
@@ -24,34 +24,22 @@
     {% include 'partials/spacer.html.twig' %}
     <section class="list">
         <div class="container">
+            <div class="row mb-5">
+                {{ form_start(listingForm) }}
+                <div class="form-group custom-select">
+                    {{ form_label(listingForm.order) }}
+                    {{ form_widget(listingForm.order) }}
+                </div>
+                {{ form_end(listingForm) }}
+            </div>
             <div class="row">
                 {% for company in companies %}
-                    <div class="col-12 col-md-6">
-                        <a href="{{ url('company_show', {'company': company.id}) }}" class="company" id="company-{{ company.id }}">
-                            <div class="section-header">
-                                <div class="selected-date">
-                                    <span>Dernière mise à jour : {{ company.updatedAt|date('d/m/Y') }}</span>
-                                </div>
-                                <h2>{{ company.name }}</h2>
-                            </div>
-                            <div class="separator-container">
-                                <div class="separator"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-4">
-                                    <span class="info"><i class="fa-solid fa-scale-balanced"></i> {{ company.legalStatus }}</span>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <span class="info"><i class="fa-solid fa-building-circle-check"></i> {{ company.registrationCity }}</span>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <span class="info"><i class="fa-solid fa-calendar-check"></i> {{ company.registrationDate|date('d/m/Y') }}</span>
-                                </div>
-                            </div>
-                        </a>
+                    <div class="col-12 col-lg-4 col-md-6 mb-4">
+                        {% include 'partials/company.html.twig' with {'company': company} %}
                     </div>
                 {% endfor %}
             </div>
         </div>
     </section>
+    {% include 'partials/spacer.html.twig' %}
 {% endblock %}

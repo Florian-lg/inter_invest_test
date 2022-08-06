@@ -1,0 +1,17 @@
+footer {
+  #footer-top {
+    height: 150px;
+    background: #111540;
+    background: linear-gradient(90deg,#111540,#272e80);
+    color: $white;
+    padding: 6rem 0 5rem 0;
+  }
+
+  #footer-bottom {
+    background: $darkBlue;
+    text-align: center;
+    color: $white;
+    padding: 10px 0;
+    font-size: 14px;
+  }
+}

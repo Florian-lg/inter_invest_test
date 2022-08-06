@@ -15,7 +15,10 @@ class SearchCompanyType extends AbstractType
         $builder
             ->add('companyName', TextType::class, [
                 'required' => false,
-                'mapped' => false
+                'mapped' => false,
+                'attr' => [
+                    'placeholder' => 'Rechercher une entreprise'
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Rechercher'

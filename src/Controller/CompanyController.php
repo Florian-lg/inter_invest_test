@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Entity\CompanyArchive;
+use App\Form\Type\ListingType;
+use App\Form\Type\OrderType;
 use App\Form\Type\SearchCompanyType;
 use App\Repository\CompanyArchiveRepository;
 use App\Repository\CompanyRepository;
@@ -18,16 +20,24 @@ class CompanyController extends AbstractController
     #[Route('/', name: 'index')]
     public function indexAction(CompanyRepository $companyRepository, Request $request): Response
     {
-        $form = $this->createForm(SearchCompanyType::class);
-        $form->handleRequest($request);
+        $searchCompanyForm = $this->createForm(SearchCompanyType::class);
+        $listingForm = $this->createForm(ListingType::class);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $searchCompanyForm->handleRequest($request);
+        $listingForm->handleRequest($request);
+
+        if ($searchCompanyForm->isSubmitted() && $searchCompanyForm->isValid()) {
+
+        }
+
+        if ($listingForm->isSubmitted() && $listingForm->isValid()) {
 
         }
 
         return $this->render('company/index.html.twig', [
             'companies' => $companyRepository->findAll(),
-            'form' => $form->createView()
+            'searchCompanyForm' => $searchCompanyForm->createView(),
+            'listingForm' => $listingForm->createView()
         ]);
     }
 

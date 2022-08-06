@@ -1,8 +1,19 @@
 $white: #fff;
+$light: #f3f8ff;
 $orange: #ed631e;
 $blue: #272e80;
+$darkBlue: #10143c;
+$lightBlue: #bbcde9;
+$pink: #dc3545;
 
 .btn-orange {
   background-color: $orange;
   color: $white;
 }
+
+$basePixel : 10px;
+$basePixelLg : 10px;
+$basePixelSm : 9px;
+$basePixelXs : 9px;
+
+$baseRadius: 7px;

@@ -1,0 +1,20 @@
+<a href="{{ url('company_show', {'company': company.id}) }}" class="company" id="company-{{ company.id }}">
+    <div class="section-header list-mode">
+        <div class="selected-date">
+            <span>Dernière mise à jour : {{ company.updatedAt|date('d/m/Y') }}</span>
+        </div>
+        <h3>{{ company.name }}</h3>
+        <span class="legal-status">{{ company.legalStatus }}</span>
+    </div>
+    <div class="separator-container list-mode">
+        <div class="separator"></div>
+    </div>
+    <div class="row more-informations">
+        <div class="col-12 col-sm-6">
+            <span class="info" title="{{ company.registrationCity  }}"><i class="fa-solid fa-building-circle-check"></i> {{ company.registrationCity }}</span>
+        </div>
+        <div class="col-12 col-sm-6">
+            <span class="info" title="{{ company.registrationDate|date('d/m/Y') }}"><i class="fa-solid fa-calendar-check"></i> {{ company.registrationDate|date('d/m/Y') }}</span>
+        </div>
+    </div>
+</a>

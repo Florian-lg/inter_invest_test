@@ -1,0 +1,17 @@
+.heading {
+  background: #111540;
+  background: linear-gradient(90deg,#111540,#272e80);
+  color: $white;
+  padding: 6rem 0 5rem 0;
+
+  #back-to-list {
+    font-size: 18px;
+    text-decoration: none;
+    color: $white;
+  }
+
+  h1 {
+    font-weight: 700;
+    margin-top: 20px;
+  }
+}

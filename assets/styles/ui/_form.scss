@@ -1,0 +1,22 @@
+form {
+  .custom-select {
+    display: flex;
+    width: fit-content;
+    /* justify-content: end; */
+    margin-left: auto;
+
+    label {
+      width: 100%;
+      position: relative;
+      top: 8px;
+      color: $blue;
+      text-align: center;
+    }
+
+    select {
+      border: 1px solid $blue;
+      color: $blue;
+      cursor: pointer;
+    }
+  }
+}

@@ -3,6 +3,8 @@
 {% block title %}{{ parent() }}Identification{% endblock %}
 
 {% block body %}
+    {% include 'sections/heading.html.twig' with {'title': 'Connexion'} %}
+
     {% if error %}
         <p class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
     {% endif %}

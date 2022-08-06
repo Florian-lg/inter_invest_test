@@ -6,213 +6,256 @@
 
 @import "~bootstrap";
 
+@import "sections/heading";
+
 @import "partials/navbar";
 @import "partials/spacer";
+@import "partials/footer";
+
+@import "ui/form";
 
 @import "components/datepicker";
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background: $white;
+html {
+    font-size: $basePixel;
 
-    section {
-        .separator-container {
-            margin-top: 40px;
-            margin-bottom: 40px;
-            padding: 0 50px;
+    @media (max-width: 1199px) {
+        font-size: $basePixelLg;
+    }
 
-            .separator {
-                height: 1px;
-                background: #d8e3f2;
+    @media (max-width: 991px) {
+        font-size: $basePixelSm;
+    }
+
+    @media (max-width: 767px) {
+        font-size: $basePixelXs;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: $white;
+
+        section {
+            .separator-container {
+                margin-top: 40px;
+                margin-bottom: 40px;
+                padding: 0 50px;
+
+                .separator {
+                    height: 1px;
+                    background: #d8e3f2;
+                }
+
+                &.list-mode {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    padding: 0 50px;
+                }
             }
-        }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            padding-right: 35px;
-            padding-top: 40px;
-
-            .selected-date {
-                height: 50px;
-                display: inline-flex;
+            .section-header {
+                display: flex;
                 align-items: center;
-                padding-left: 50px;
-                padding-right: 25px;
-                border-radius: 0 8px 8px 0;
-                color: #fff;
-                font-size: 18px;
-                font-weight: 700;
-                letter-spacing: -.5px;
-                background: #ed6c7e;
-            }
-        }
-    }
+                justify-content: space-between;
+                flex-wrap: wrap;
+                padding-right: 35px;
+                padding-top: 40px;
 
-    .heading {
-        background: #111540;
-        background: linear-gradient(90deg,#111540,#272e80);
-        color: $white;
-        padding: 6rem 0 5rem 0;
+                &.list-mode {
+                    padding-right: 0;
+                    padding-top: 0;
 
-        #back-to-list {
-            font-size: 18px;
-            text-decoration: none;
-            color: $white;
-        }
+                    h3 {
+                        text-align: center;
+                        font-size: 2.4rem;
+                        width: 100%;
+                        font-weight: 700;
+                        margin-top: 20px;
+                        
+                        @media (max-width: 1200px) {
+                            font-size: 1.8rem;
+                        }
+                    }
 
-        h1 {
-            font-weight: 700;
-            margin-top: 20px;
-        }
-    }
+                    .selected-date {
+                        width: 100%;
+                        border-top-right-radius: $baseRadius;
+                        border-top-left-radius: $baseRadius;
+                        border-bottom-right-radius: 0;
+                        text-align: center;
+                    }
 
-    .content {
-        .content-with-bg {
-            border-top-left-radius: 25px;
-            border-top-right-radius: 25px;
-            background: $white;
-        }
-
-        position: relative;
-        margin-top: -40px;
-
-        .content-block {
-            border-radius: 25px;
-            background: $white;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-
-            &#date {
-                padding: 20px;
-            }
-
-            form[name="search_company"] {
-                input[type="text"] {
-                    border-top-right-radius: 0;
-                    border-bottom-right-radius: 0;
-
-                    &:focus {
-                        box-shadow: none;
+                    .legal-status {
+                        background: #bbcde9;
+                        padding: 3px 12px;
+                        border-radius: 4px;
+                        margin: 0 auto;
+                        color: #427bcd;
+                        border: 1px solid #7fa2d5;
                     }
                 }
 
-                button {
-                    border-top-left-radius: 0;
-                    border-bottom-left-radius: 0;
-                    background-color: $orange;
-                    border-color: $orange;
+                .selected-date {
+                    height: 50px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding-left: 50px;
+                    padding-right: 25px;
+                    border-top-right-radius: $baseRadius;
+                    border-bottom-right-radius: $baseRadius;
+                    color: #fff;
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    letter-spacing: -0.5px;
+                    background: $pink;
+                }
+            }
+        }
 
-                    &:focus {
-                        box-shadow: none;
+        .content {
+            .content-with-bg {
+                border-top-left-radius: $baseRadius;
+                border-top-right-radius: $baseRadius;
+                background: $white;
+            }
+
+            position: relative;
+            margin-top: -40px;
+
+            .content-block {
+                border-radius: $baseRadius;
+                background: $white;
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
+                &.search-company {
+                    h2 {
+                        margin-bottom: 3rem;
+                        font-size: 2.8rem;
+                        color: $blue;
+                    }
+
+                    button {
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                        background-color: $orange;
+                        border-color: $orange;
+                        font-size: 1.8rem;
+                        padding: 0 30px;
+
+                        &:focus {
+                            box-shadow: none;
+                        }
+                    }
+
+                    input[type="text"] {
+                        border: 1px solid $lightBlue;
+                        background: #f8fafd;
+                        color: $lightBlue;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                        font-size: 1.4rem;
+                        padding: 12px;
+
+                        &:focus {
+                            box-shadow: none;
+                        }
+                    }
+                }
+
+                &#date {
+                    padding: 20px;
+                }
+
+                .content-block-main {
+                    padding: 0 50px 25px;
+
+                    h2 {
+                        position: relative;
+                        color: #272e80;
+                        font-size: 2.4rem;
+                        margin-bottom: 40px;
+                        width: fit-content;
+
+                        &:after {
+                            content: "";
+                            position: absolute;
+                            height: 3px;
+                            background-color: $blue;
+                            left: 0;
+                            right: 0;
+                            bottom: -5px;
+                        }
+                    }
+
+                    .info {
+                        display: block;
+                        font-size: 2.1rem;
+                        margin-bottom: 0.5rem;
+
+                        svg {
+                            color: $orange;
+                            width: 35px;
+                            margin-right: 10px;
+                        }
                     }
                 }
             }
+        }
 
-            .content-block-main {
-                padding: 0 50px 25px;
+        .list {
+            margin: 3rem 0;
+            padding: 3rem 0;
 
-                h2 {
-                    position: relative;
-                    color: #272e80;
-                    font-size: 24px;
-                    margin-bottom: 40px;
-                    width: fit-content;
+            &.bg-light-blue {
+                background: $light;
+            }
 
-                    &:after {
-                        content: "";
-                        position: absolute;
-                        height: 3px;
-                        background-color: $blue;
-                        left: 0;
-                        right: 0;
-                        bottom: -5px;
-                    }
+            h2 {
+                font-size: 3.2rem;
+                color: $blue;
+                margin-bottom: 4rem;
+                position: relative;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    height: 4px;
+                    left: 0;
+                    width: 50px;
+                    background: $orange;
+                    bottom: -7px;
+                }
+            }
+
+            .company {
+                display: block;
+                border-radius: $baseRadius;
+                box-shadow: 1px 5px 8px rgb(212, 212, 212, 0.5);
+                text-decoration: none;
+                position: relative;
+                font-size: 1.4rem;
+                background: $white;
+
+                h3 {
+
                 }
 
                 .info {
-                    display: block;
-                    font-size: 21px;
-                    margin-bottom: 0.5rem;
+                    display: flex;
+                    justify-content: center;
 
                     svg {
                         color: $orange;
-                        width: 35px;
-                        margin-right: 10px;
+                        margin-right: 5px;
+                        margin-top: 2px;
                     }
+                }
 
-                    /*&:before {
-                        content: "";
-                        color: #ed631e;
-                        font-weight: 900;
-                    }
-
-                    &#company-name {
-                        &:before {
-                            content: "\f1ad"
-                        }
-                    }
-
-                    &#legal-status {
-                        &:before {
-                            content: "\f24e";
-                        }
-                    }
-
-                    &#registration-city {
-                        &:before {
-                            content: "\e4d2";
-                        }
-                    }
-
-                    &#registration-date {
-                        &:before {
-                            content: "\f274";
-                        }
-                    }
-
-                    &#head-office-name {
-                        &:before {
-                            content: "\f1ad"
-                        }
-                    }
-
-                    &#head-office-name {
-                        &:before {
-                            content: "\e4d2"
-                        }
-                    }
-
-                    &#head-office-zipcode {
-                        &:before {
-                            content: "\f276"
-                        }
-                    }
-
-                    &#head-office-address {
-                        &:before {
-                            content: "\e4d2"
-                        }
-                    }
-
-                    &#head-office-country {
-                        &:before {
-                            content: "\f0ac"
-                        }
-                    } */
+                .more-informations {
+                    padding: 0 20px 15px 0;
                 }
             }
-        }
-    }
-
-    .list {
-        .company {
-            display: block;
-            padding: 15px;
-            border-radius: 25px;
-            box-shadow: 1px 5px 8px rgb(212, 212, 212, 0.5);
-            text-decoration: none;
         }
     }
 }

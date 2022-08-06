@@ -19,10 +19,11 @@
     </head>
     <body>
         <header>
-            {{ include('partials/navbar.html.twig') }}
+            {% include 'partials/navbar.html.twig' %}
         </header>
         <div id="content" role="main">
             {% block body %}{% endblock %}
         </div>
+        {% include 'partials/footer.html.twig' %}
     </body>
 </html>
