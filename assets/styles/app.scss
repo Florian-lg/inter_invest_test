@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
 @import "@eonasdan/tempus-dominus/dist/css/tempus-dominus.css";
 
@@ -9,15 +9,19 @@
 @import "sections/heading";
 
 @import "partials/navbar";
-@import "partials/spacer";
 @import "partials/footer";
+@import "partials/toast";
 
 @import "ui/form";
+@import "ui/buttons";
 
 @import "components/datepicker";
+@import "components/accordion";
 
 html {
     font-size: $basePixel;
+    position: relative;
+    min-height: 100%;
 
     @media (max-width: 1199px) {
         font-size: $basePixelLg;
@@ -34,6 +38,8 @@ html {
     body {
         font-family: 'Roboto', sans-serif;
         background: $white;
+        font-weight: 300;
+        min-height: 100vh;
 
         section {
             .separator-container {
@@ -83,6 +89,7 @@ html {
                         border-top-left-radius: $baseRadius;
                         border-bottom-right-radius: 0;
                         text-align: center;
+                        padding: 0;
                     }
 
                     .legal-status {
@@ -120,6 +127,11 @@ html {
                 background: $white;
             }
 
+            &.gradient {
+                background: #111540;
+                background: linear-gradient(90deg,#111540,#272e80);
+            }
+
             position: relative;
             margin-top: -40px;
 
@@ -128,11 +140,46 @@ html {
                 background: $white;
                 box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 
+                #login {
+                    label {
+                        font-size: 1.8rem;
+                    }
+
+                    input {
+                        font-size: 1.4rem;
+                        padding: 7px 15px;
+                    }
+                }
+
                 &.search-company {
                     h2 {
                         margin-bottom: 3rem;
                         font-size: 2.8rem;
                         color: $blue;
+                        font-weight: 300;
+                    }
+
+                    input[type="text"] {
+                        border: 1px solid $lightBlue;
+                        background: #f8fafd;
+                        color: $darkBlue;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                        font-size: 1.4rem;
+                        padding: 12px;
+
+                        @media (max-width: 576px) {
+                            border-radius: 4px;
+                            margin-bottom: 10px;
+                        }
+
+                        &:focus {
+                            box-shadow: none;
+                        }
+
+                        &::placeholder {
+                            color: $lightBlue;
+                        }
                     }
 
                     button {
@@ -142,20 +189,11 @@ html {
                         border-color: $orange;
                         font-size: 1.8rem;
                         padding: 0 30px;
-
-                        &:focus {
-                            box-shadow: none;
+                        
+                        @media (max-width: 576px) {
+                            border-radius: 4px;
+                            padding: 10px;
                         }
-                    }
-
-                    input[type="text"] {
-                        border: 1px solid $lightBlue;
-                        background: #f8fafd;
-                        color: $lightBlue;
-                        border-top-right-radius: 0;
-                        border-bottom-right-radius: 0;
-                        font-size: 1.4rem;
-                        padding: 12px;
 
                         &:focus {
                             box-shadow: none;
@@ -176,14 +214,15 @@ html {
                         font-size: 2.4rem;
                         margin-bottom: 40px;
                         width: fit-content;
+                        font-weight: 300;
 
                         &:after {
                             content: "";
                             position: absolute;
-                            height: 3px;
-                            background-color: $blue;
+                            height: 2px;
+                            background-color: $orange;
                             left: 0;
-                            right: 0;
+                            width: 40px;
                             bottom: -5px;
                         }
                     }
@@ -200,12 +239,21 @@ html {
                         }
                     }
                 }
+
+                &#date {
+                    .btn {
+                        width: 100%;
+                    }
+                }
+
+                .btn {
+                    font-size: 1.4rem;
+                }
             }
         }
 
         .list {
-            margin: 3rem 0;
-            padding: 3rem 0;
+            padding: 5rem 0;
 
             &.bg-light-blue {
                 background: $light;
@@ -216,11 +264,12 @@ html {
                 color: $blue;
                 margin-bottom: 4rem;
                 position: relative;
+                font-weight: 300;
 
                 &:after {
                     content: "";
                     position: absolute;
-                    height: 4px;
+                    height: 2px;
                     left: 0;
                     width: 50px;
                     background: $orange;
@@ -236,9 +285,15 @@ html {
                 position: relative;
                 font-size: 1.4rem;
                 background: $white;
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
 
-                h3 {
-
+                &:hover {
+                    .overlay {
+                        left: 0;
+                        opacity: 1;
+                    }
                 }
 
                 .info {
@@ -254,6 +309,37 @@ html {
 
                 .more-informations {
                     padding: 0 20px 15px 0;
+                }
+
+                .overlay {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: -150px;
+                    width: 100%;
+                    height: 100%;
+                    transition: all, 0.25s;
+                    border-radius: 4px;
+                    display: flex;
+                    justify-content: start;
+                    align-items: end;
+                    padding: 20px;
+                    background: #111540;
+                    background: linear-gradient(90deg,#111540,#272e80);
+                    opacity: 0;
+                    transition: all, 0.25s;
+
+                    .content {
+                        span {
+                            color: $white;
+                            font-size: 21px;
+                            font-weight: 700;
+
+                            svg {
+                                color: $orange
+                            }
+                        }
+                    }
                 }
             }
         }

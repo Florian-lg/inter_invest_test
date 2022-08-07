@@ -15,10 +15,6 @@ class SiteType extends AbstractType
     {
 
         $builder
-            ->add('isHeadOffice', CheckboxType::class, [
-                'label' => 'Siège social',
-                'required' => false
-            ])
             ->add('name', TextType::class, [
                 'label' => 'Nom du site',
                 'required' => true,

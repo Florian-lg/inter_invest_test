@@ -11,19 +11,58 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import * as tempusDominus from "@eonasdan/tempus-dominus";
+import {DateTime} from "@eonasdan/tempus-dominus";
 
 const $ = require('jquery');
 require('bootstrap');
 
-const picker = new tempusDominus.TempusDominus(document.getElementById('inlinePicker'), {
+const pickerElement = document.getElementById('inlinePicker');
+
+const picker = new tempusDominus.TempusDominus(pickerElement, {
     display: {
         inline: true
-    }
+    },
+    defaultDate: setDate()
 });
 
+$(document).ready( function () {
+    setDate();
 
+    $("#validate-date").on("click", function () {
+        changeDate();
+    });
+});
 
-$(".day").on("click", function () {
+function setDate() {
+    var url = window.location.href;
+    const paramsIndex = url.indexOf("?date");
+    let selectedDate = new DateTime();
+
+    if (paramsIndex > -1) {
+        const params = url.slice(paramsIndex + 6);
+        const values = params.split('-');
+
+        let date = {
+            'year': parseInt(values[0]),
+            'month': parseInt(values[1]) - 1,
+            'day': parseInt(values[2]),
+            'hours': parseInt(values[3]),
+            'minutes': parseInt(values[4]),
+            'seconds': parseInt(values[5])
+        };
+
+        selectedDate.setFullYear(date.year);
+        selectedDate.setMonth(date.month);
+        selectedDate.setDate(date.day);
+        selectedDate.setHours(date.hours);
+        selectedDate.setMinutes(date.minutes);
+        selectedDate.setSeconds(date.seconds);
+    }
+
+    return selectedDate;
+}
+
+function changeDate() {
     const viewDate = picker.viewDate;
 
     let date = {
@@ -37,7 +76,6 @@ $(".day").on("click", function () {
 
     var url = window.location.href;
     const paramsIndex = url.indexOf("?date");
-    console.log(paramsIndex)
 
     if (paramsIndex > -1) {
         url = url.slice(0, paramsIndex);
@@ -46,5 +84,5 @@ $(".day").on("click", function () {
     url += `?date=${date.year}-${date.month}-${date.day}-${date.hours}-${date.minutes}-${date.seconds}`;
 
     window.location.href = url;
-})
+}
 

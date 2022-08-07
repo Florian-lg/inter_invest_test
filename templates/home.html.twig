@@ -3,16 +3,19 @@
 {% block title %}Inter invest test{% endblock %}
 
 {% block body %}
-    {% include 'sections/heading.html.twig' with {'title': 'Inter invest test'} %}
+    {% include 'sections/heading.html.twig' with {
+        'title': 'Inter invest test',
+        'subtitle': 'Sur cette application vous pourrez saisir des entreprises et retrouver ses données telles qu\'elles l\'étaient à un jour précis !'
+    } %}
 
-    <section class="content mb-5">
+    <section class="content">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="content-block p-4 search-company" id="main-content">
                         <h2>Rechercher une entreprise</h2>
                         {{ form_start(searchCompanyForm) }}
-                        <div class="d-flex">
+                        <div class="d-flex flex-column flex-sm-row">
                             {{ form_widget(searchCompanyForm.companyName) }}
                             {{ form_widget(searchCompanyForm.submit) }}
                         </div>

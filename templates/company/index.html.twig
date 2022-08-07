@@ -3,7 +3,7 @@
 {% block title %}{{ parent() }} Liste des entreprises{% endblock %}
 
 {% block body %}
-    {% include 'sections/heading.html.twig' with {'title': 'Liste des entreprises'} %}
+    {% include 'sections/heading.html.twig' with {'title': 'Liste des entreprises', 'backLink': url('home'), 'backTitle': 'Page d\'accueil'} %}
 
     <section class="content">
         <div class="container">
@@ -21,17 +21,8 @@
             </div>
         </div>
     </section>
-    {% include 'partials/spacer.html.twig' %}
     <section class="list">
         <div class="container">
-            <div class="row mb-5">
-                {{ form_start(listingForm) }}
-                <div class="form-group custom-select">
-                    {{ form_label(listingForm.order) }}
-                    {{ form_widget(listingForm.order) }}
-                </div>
-                {{ form_end(listingForm) }}
-            </div>
             <div class="row">
                 {% for company in companies %}
                     <div class="col-12 col-lg-4 col-md-6 mb-4">
@@ -41,5 +32,4 @@
             </div>
         </div>
     </section>
-    {% include 'partials/spacer.html.twig' %}
 {% endblock %}

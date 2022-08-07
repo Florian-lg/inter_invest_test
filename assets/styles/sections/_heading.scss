@@ -1,17 +1,27 @@
 .heading {
   background: #111540;
-  background: linear-gradient(90deg,#111540,#272e80);
+  background: linear-gradient(90deg, #111540, #272e80);
   color: $white;
-  padding: 6rem 0 5rem 0;
+  padding: 7rem 0 7rem 0;
 
   #back-to-list {
     font-size: 18px;
     text-decoration: none;
     color: $white;
+    transition: all, 0.25s;
+    font-weight: 500;
+
+    &:hover {
+      color: $orange;
+    }
   }
 
   h1 {
     font-weight: 700;
     margin-top: 20px;
+  }
+
+  .subtitle {
+    font-size: 1.8rem;
   }
 }

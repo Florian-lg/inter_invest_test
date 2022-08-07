@@ -7,52 +7,90 @@ nav {
     }
 
     .navbar-toggler {
-      background-color: $orange;
+      background-color: transparent;
+      border: none;
+      font-size: 2.4rem;
 
       svg {
-        color: $white;
+        color: $orange;
       }
     }
 
-    .nav-link {
-      font-size: 21px;
+    .navbar-brand {
+      font-size: 2.1rem;
       color: $blue;
-      position: relative;
       transition: all, 0.25s;
 
-      &:after {
-        content: "";
-        position: absolute;
-        height: 3px;
-        width: 50%;
-        right: 20px;
-        bottom: 0;
-        background-color: transparent;
-        transition: all, 0.25s;
-      }
-
-      &:before {
-        content: "";
-        position: absolute;
-        height: 3px;
-        width: 50%;
-        left: 20px;
-        bottom: 0;
-        background-color: transparent;
-        transition: all, 0.25s;
-      }
-
-      &:hover {
+      &.active, &:hover {
         color: $orange;
+      }
+    }
+
+    .nav-item {
+      margin: 0 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &.active {
+        .nav-link {
+          color: $orange;
+
+          &:after {
+            background-color: $orange;
+            right: 0;
+          }
+
+          &:before {
+            background-color: $orange;
+            left: 0;
+          }
+        }
+      }
+
+      .nav-link {
+        font-size: 21px;
+        color: $blue;
+        position: relative;
+        transition: all, 0.25s;
+        padding: 10px;
+        font-weight: 500;
 
         &:after {
-          background-color: $orange;
-          right: 0;
+          content: "";
+          position: absolute;
+          height: 3px;
+          width: 50%;
+          right: 20px;
+          bottom: 0;
+          background-color: transparent;
+          transition: all, 0.25s;
         }
 
         &:before {
-          background-color: $orange;
-          left: 0;
+          content: "";
+          position: absolute;
+          height: 3px;
+          width: 50%;
+          left: 20px;
+          bottom: 0;
+          background-color: transparent;
+          transition: all, 0.25s;
+        }
+
+        &:hover {
+          color: $orange;
+
+          &:after {
+            background-color: $orange;
+            right: 0;
+          }
+
+          &:before {
+            background-color: $orange;
+            left: 0;
+          }
         }
       }
     }

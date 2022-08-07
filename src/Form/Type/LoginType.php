@@ -22,7 +22,9 @@ class LoginType extends AbstractType
                 'required' => true,
                 'label' => 'Mot de passe'
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Connexion'
+            ])
         ;
     }
 

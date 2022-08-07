@@ -3,13 +3,16 @@
         {% if backLink is defined %}
             <div class="row">
                 <div class="col-12">
-                    <a href="{{ backLink }}" id="back-to-list"><i class="fa-solid fa-arrow-left"></i> Retour à la liste</a>
+                    <a href="{{ backLink }}" id="back-to-list"><i class="fa-solid fa-arrow-left"></i> {{ backTitle }}</a>
                 </div>
             </div>
         {% endif %}
         <div class="row">
             <div class="col-12">
                 <h1>{{ title ?? '' }}</h1>
+                {% if subtitle is defined %}
+                    <span class="subtitle">{{ subtitle }}</span>
+                {% endif %}
             </div>
         </div>
     </div>

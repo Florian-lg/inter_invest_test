@@ -3,10 +3,27 @@
     width: 100%;
     background-color: transparent;
     box-shadow: none;
+    font-size: 1.4rem;
+
+    .calendar-header {
+      padding: 10px 0;
+      background: $pink;
+      border-radius: 4px;
+    }
 
     .day {
       &.active {
         background-color: $blue;
+      }
+    }
+
+    .picker-switch {
+      color: $white
+    }
+
+    .next, .previous {
+      svg {
+        color: $white;
       }
     }
   }

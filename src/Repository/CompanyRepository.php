@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Company;
+use App\Entity\CompanyArchive;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -44,7 +46,7 @@ class CompanyRepository extends ServiceEntityRepository
     {
         return $this
             ->createQueryBuilder('c')
-            //->orderBy('c.updatedAt', 'DESC')
+            ->orderBy('c.updatedAt', 'DESC')
             ->setMaxResults($maxResults)
             ->getQuery()
             ->getResult()
@@ -55,8 +57,20 @@ class CompanyRepository extends ServiceEntityRepository
     {
         return $this
             ->createQueryBuilder('c')
-            //->orderBy('c.createdAt', 'DESC')
+            ->orderBy('c.createdAt', 'DESC')
             ->setMaxResults($maxResults)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findCompaniesLike(?string $value)
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->join(CompanyArchive::class, 'ca', Join::WITH, 'ca.company = c.id')
+            ->andWhere('ca.name LIKE :value')
+            ->setParameter('value', '%' . $value . '%')
             ->getQuery()
             ->getResult()
         ;

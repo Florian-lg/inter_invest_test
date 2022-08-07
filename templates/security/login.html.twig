@@ -9,5 +9,15 @@
         <p class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
     {% endif %}
 
-    {{ form(form, {'attr': {'action': path('app_login') }} ) }}
+    <section class="content gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content-block p-4" id="main-content">
+                        {{ form(form, {'attr': {'action': path('app_login') }} ) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -3,11 +3,11 @@
 {% block title %}{{ parent() }} {{ company.name }}{% endblock %}
 
 {% block body %}
-    {% include 'sections/heading.html.twig' with {'title': company.name, 'backLink': url('company_index') } %}
+    {% include 'sections/heading.html.twig' with {'title': company.name, 'backLink': url('company_index'), 'backTitle': 'Retour à la liste' } %}
     <section class="content mb-5">
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-8">
+            <div class="row flex-column-reverse flex-lg-row">
+                <div class="col-12 col-lg-8">
                     <div class="content-block" id="main-content">
                         <div class="section-header">
                             <div class="selected-date">
@@ -25,113 +25,76 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 col-sm-6">
+                                    <div class="col-12 col-md-6">
                                         <span class="info"><i class="fa-solid fa-id-card"></i> {{ company.name }}</span>
                                     </div>
-                                    <div class="col-12 col-sm-6">
+                                    <div class="col-12 col-md-6">
                                         <span class="info"><i class="fa-solid fa-scale-balanced"></i> {{ company.legalStatus }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 col-sm-6">
+                                    <div class="col-12 col-md-6">
                                         <span class="info"><i class="fa-solid fa-building-circle-check"></i> {{ company.registrationCity }}</span>
                                     </div>
-                                    <div class="col-12 col-sm-6">
+                                    <div class="col-12 col-md-6">
                                         <span class="info"><i class="fa-solid fa-calendar-check"></i> {{ company.registrationDate|date('d/m/Y') }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div id="sites">
                                 <div class="row">
-                                    {% if company.headOffice is not null %}
-                                        <div class="col-12">
-                                            <h2>Siège social</h2>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 col-sm-6">
-                                                <span class="info"><i class="fa-solid fa-building-circle-check"></i> {{ company.headOffice.name }}</span>
+                                    <div class="col-12">
+                                        <h2>Siège social</h2>
+                                    </div>
+                                    <div class="accordion" id="accordionSites">
+                                        {% for site in company.sites %}
+                                            <div class="accordion-item">
+                                                <h3 class="accordion-header" id="heading-{{ loop.index0 }}">
+                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ loop.index0 }}" aria-expanded="true" aria-controls="collapse-{{ loop.index0 }}">
+                                                        {{ site.name }}
+                                                    </button>
+                                                </h3>
+                                                <div id="collapse-{{ loop.index0 }}" class="accordion-collapse collapse {% if loop.index0 == 0 %}show{% endif %}" aria-labelledby="headingOne" data-bs-parent="#accordionSites">
+                                                    <div class="accordion-body">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-6">
+                                                                <span class="info"><i class="fa-solid fa-building-circle-check"></i> {{ site.name }}</span>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <span class="info"><i class="fa-solid fa-city"></i> {{ site.city }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-6">
+                                                                <span class="info"><i class="fa-solid fa-location-dot"></i> {{ site.zipcode }}</span>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <span class="info"><i class="fa-solid fa-map-location"></i> {{ site.address }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-6">
+                                                                <span class="info"><i class="fa-solid fa-globe"></i> {{ site.country }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-12 col-sm-6">
-                                                <span class="info"><i class="fa-solid fa-city"></i> {{ company.headOffice.city }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 col-sm-6">
-                                                <span class="info"><i class="fa-solid fa-location-dot"></i> {{ company.headOffice.zipcode }}</span>
-                                            </div>
-                                            <div class="col-12 col-sm-6">
-                                                <span class="info"><i class="fa-solid fa-map-location"></i> {{ company.headOffice.address }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 col-sm-6">
-                                                <span class="info"><i class="fa-solid fa-globe"></i> {{ company.headOffice.country }}</span>
-                                            </div>
-                                            <div class="col-12 col-sm-6">
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sitesModal">
-                                                    Voir tous les sites
-                                                </button>
-                                            </div>
-                                        </div>
-                                    {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-lg-4 mb-5 mb-lg-0">
                     <div class="content-block" id="date">
                         <div class='log-event' id='inlinePicker'></div>
+                        <button class="btn btn-primary" id="validate-date"><i class="fa-solid fa-check"></i> Valider la date et l'heure</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="modal fade" id="sitesModal" tabindex="-1" aria-labelledby="sitesModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="sitesModalLabel">Sites de l'entreprise</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="accordion" id="accordionSites">
-                        {% for site in company.sites %}
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading-{{ loop.index0 }}">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ loop.index0 }}" aria-expanded="true" aria-controls="collapse-{{ loop.index0 }}">
-                                    {{ site.name }}
-                                </button>
-                            </h2>
-                            <div id="collapse-{{ loop.index0 }}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionSites">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-6">
-                                            {{ site.city }}
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            {{ site.zipcode }}
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-sm-6">
-                                            {{ site.address }}
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            {{ site.country }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
     {{ include('partials/toast.html.twig') }}
 {% endblock %}

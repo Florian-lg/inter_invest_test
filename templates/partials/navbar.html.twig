@@ -1,11 +1,14 @@
+{% set route_name = app.request.attributes.get('_route') %}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
+        <a class="navbar-brand {% if route_name == 'home' %}active{% endif %}" href="{{ url('home') }}"><i class="fa-solid fa-house"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
+                <li class="nav-item {% if route_name == 'company_index' %}active{% endif %}">
                     <a class="nav-link" aria-current="page" href="{{ url('company_index') }}">Liste des entreprises</a>
                 </li>
             </ul>
