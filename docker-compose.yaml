@@ -26,7 +26,11 @@ services:
     build: ./containers/nginx
     ports:
       - "80:80"
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
     volumes:
-      - ./html:/var/www/html
+      - ./:/var/www/html/inter_invest_test
       - ./.vhosts:/etc/nginx/conf.d
 
