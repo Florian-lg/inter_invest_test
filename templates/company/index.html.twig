@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="content-block p-4 search-company" id="main-content">
                         {{ form_start(searchCompanyForm) }}
-                            <div class="d-flex">
+                            <div class="d-flex flex-column flex-sm-row">
                                 {{ form_widget(searchCompanyForm.companyName) }}
                                 {{ form_widget(searchCompanyForm.submit) }}
                             </div>
@@ -24,11 +24,22 @@
     <section class="list">
         <div class="container">
             <div class="row">
-                {% for company in companies %}
-                    <div class="col-12 col-lg-4 col-md-6 mb-4">
-                        {% include 'partials/company.html.twig' with {'company': company} %}
+                {% if pagination|length > 0 %}
+                    {% for company in pagination %}
+                        <div class="col-12 col-lg-4 col-md-6 mb-4">
+                            {% include 'partials/company.html.twig' with {'company': company} %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12">
+                        <span class="no-company">Aucune entreprise n'a été trouvée</span>
                     </div>
-                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
             </div>
         </div>
     </section>

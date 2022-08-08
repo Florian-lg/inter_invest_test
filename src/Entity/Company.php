@@ -62,6 +62,8 @@ class Company
             $companyArchive->setCompany($this);
         }
 
+        $this->updatedAt = new \DateTime();
+
         return $this;
     }
 

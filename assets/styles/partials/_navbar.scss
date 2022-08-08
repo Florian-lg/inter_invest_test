@@ -2,7 +2,7 @@ nav {
   &.navbar {
     padding: 0;
 
-    @media (max-width: 992px) {
+    @media (max-width: 576px) {
       padding: 5px;
     }
 
@@ -50,7 +50,7 @@ nav {
       }
 
       .nav-link {
-        font-size: 21px;
+        font-size: 2.1rem;
         color: $blue;
         position: relative;
         transition: all, 0.25s;
@@ -90,6 +90,19 @@ nav {
           &:before {
             background-color: $orange;
             left: 0;
+          }
+        }
+
+        @media (max-width: 576px) {
+          margin-left: -20px;
+          font-size: 1.6rem;
+
+          &:hover {
+            color: $blue;
+
+            &:after, &:before {
+              background-color: $white;
+            }
           }
         }
       }

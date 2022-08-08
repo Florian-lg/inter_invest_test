@@ -1,0 +1,15 @@
+.navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+
+  .pagination {
+    border-radius: 4px;
+    box-shadow: 1px 5px 8px rgb(212 212 212 / 50%);
+  }
+
+  .page-link {
+    font-size: 1.4rem;
+    border: none;
+  }
+}

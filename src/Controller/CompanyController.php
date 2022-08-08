@@ -8,6 +8,7 @@ use App\Form\Type\OrderType;
 use App\Form\Type\SearchCompanyType;
 use App\Repository\CompanyArchiveRepository;
 use App\Repository\CompanyRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompanyController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function indexAction(CompanyRepository $companyRepository, Request $request): Response
+    public function indexAction(CompanyRepository $companyRepository,
+                                Request $request,
+                                PaginatorInterface $paginator): Response
     {
         $searchCompanyForm = $this->createForm(SearchCompanyType::class);
 
@@ -27,8 +30,16 @@ class CompanyController extends AbstractController
             $searchValue = $searchCompanyForm->get('companyName')->getData();
         }
 
+        $companies = $companyRepository->findCompaniesLike($searchValue ?? null);
+
+        $pagination = $paginator->paginate(
+            $companies,
+            $request->query->getInt('page', 1),
+            9
+        );
+
         return $this->render('company/index.html.twig', [
-            'companies' => $companyRepository->findCompaniesLike($searchValue ?? null),
+            'pagination' => $pagination,
             'searchCompanyForm' => $searchCompanyForm->createView(),
         ]);
     }
