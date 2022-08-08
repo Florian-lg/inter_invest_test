@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    container_name: database
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./.data:/var/lib/mysql
+      - ./dump:/tmp/dump
+    command: --max_allowed_packet=32505856
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+
+  php8.1:
+    container_name: php8.1-fpm
+    build: ./containers/php8.1-fpm
+    volumes:
+      - ./:/var/www/html/inter_invest_test
+    environment:
+      - DOCKER_ADDR=172.19.0.1
+
+  nginx:
+    container_name: nginx
+    build: ./containers/nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/var/www/html
+      - ./.vhosts:/etc/nginx/conf.d
+
