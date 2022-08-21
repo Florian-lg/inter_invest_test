@@ -20,7 +20,7 @@ Run ```yarn install```
 
 Run ```yarn build```
 
-Now you can open a browser and paste it in url box ```http://inter-invest-test.local/```
+Now you can open a browser and paste it in url box ```http://inter-invest-test.local/``` or ```localhost```
 
 # Configuration
 
